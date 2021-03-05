@@ -38,3 +38,5 @@ score = len((set1 & set2)) / len((set1 | set2)) # set1,set2 represent two sets o
 ```
 ## Co-expression network construction 
 We used prognostic-hallmark genes of breast cancer to construct the network.The full breast cancer FPKM values data can be found at https://fairdomhub.org/data_files/4047. Prognostic-hallmark genes with log-transformed FPKM value belonging to GO1 to GO4 can be found at https://fairdomhub.org/assays/1392?graph_view=tree.
+We used the Rpackage WGCNA to construct the co-expression network with aforementioned data(see [WGCNA](https://github.com/chestnzu1/BMC/blob/main/WGCNA_FPKM)). Clusters were 
+identified and export to cytoscape to find hub genes for each cluster. 5 genes with the highest intra-modular connectivity in each module were designated as hub genes.
