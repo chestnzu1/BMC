@@ -1,6 +1,5 @@
 Code are for publication 'Establishing A Consensus Annotation for the Hallmarks of Cancer based on Gene Ontology and pathway annotations'.Data can be found at FairdomHub https://fairdomhub.org/programmes/137.
 
-# workflow
 ## Literature source
 4 different GO mapping methods are acquired from paper:
 1)  Knijnenburg, T.A., Bismeijer, T., Wessels, L.F., Shmulevich, I.: A multilevel pan-cancer map links gene mutations to cancer hallmarks. Chinese journal of cancer 34(3), 48 (2015)
@@ -11,7 +10,7 @@ Code are for publication 'Establishing A Consensus Annotation for the Hallmarks 
 1)Uhlen, M., Zhang, C., Lee, S., Sjöstedt, E., Fagerberg, L., Bidkhori, G., Benfeitas, R., Arif, M., Liu, Z., Edfors, F., et al.: A pathology atlas of the human cancer transcriptome. Science 357(6352) (2017)
 
 ## Semantic similarity between GO methods
-The semantic similarity between select GO terms sets were calculated by using R package 'GOSemSim':
+The semantic similarity between select GO terms sets were calculated by using R package *GOSemSim*:
 ```
 mgoSim(GO1, GO2, semData, measure = "Wang", combine = "BMA")
 ```
@@ -21,7 +20,7 @@ GO1, GO2 are two of four sets of selected GO terms.  semData is the GOSemSimDATA
 Child terms of select GO terms from each method are retrieved by using QUICKGO API(see [GO_descendant.py](https://github.com/chestnzu1/BMC/blob/main/GO_descendants.py)). Some selected terms are obsoleted.therefore, they are not included in this section. We only consider relation type 'is_a' and 'part_of'. 
 
 ## Gene annotated to selected pathways, GO terms and their descendants 
-Gene products annotated to selected pathways were directly provided by the author. For other methods, gene products annotated to select GO terms and their descendant terms were retrieved by using QUICKGO API(see [GO_annotation](https://github.com/chestnzu1/BMC/blob/main/GO_annotation.py)). As it can only retrieve GO terms with less than 10000 annotations, while for selected GO terms, two GO terms(GO:0007155 and GO:0006955) have more than 10000 annotations. Therefore, we downloaded their annotations by using the QUICKGO webtool. Next, we converted retrieved gene products ID to Ensembl ID for each method by using Biomart-Ensembl webtool. The full list of hallmark genes can be found at https://fairdomhub.org/data_files/4013?graph_view=tree.
+Gene products annotated to selected pathways were directly provided by the author. For other methods, gene products annotated to select GO terms and their descendant terms were retrieved by using QUICKGO API(see [GO_annotation](https://github.com/chestnzu1/BMC/blob/main/GO_annotation.py)). As it can only retrieve GO terms with less than 10000 annotations, while for selected GO terms, two GO terms(*GO:0007155* and *GO:0006955*) have more than 10000 annotations. Therefore, we downloaded their annotations by using the QUICKGO webtool. Next, we converted retrieved gene products ID to Ensembl ID for each method by using Biomart-Ensembl webtool. The full list of hallmark genes can be found at https://fairdomhub.org/data_files/4013?graph_view=tree.
 
 ## Upset plot
 The upsetplot presents the intersections among 5 mapping methods. it was accomplished by using R package 'UpsetR'.
@@ -38,5 +37,8 @@ score = len((set1 & set2)) / len((set1 | set2)) # set1,set2 represent two sets o
 ```
 ## Co-expression network construction 
 We used prognostic-hallmark genes of breast cancer to construct the network.The full breast cancer FPKM values data can be found at https://fairdomhub.org/data_files/4047. Prognostic-hallmark genes with log-transformed FPKM value belonging to GO1 to GO4 can be found at https://fairdomhub.org/assays/1392?graph_view=tree.
-We used the Rpackage WGCNA to construct the co-expression network with aforementioned data(see [WGCNA](https://github.com/chestnzu1/BMC/blob/main/WGCNA_FPKM)). Clusters were 
-identified and export to cytoscape to find hub genes for each cluster. 5 genes with the highest intra-modular connectivity in each module were designated as hub genes.
+We used the Rpackage *WGCNA* to construct the co-expression network with aforementioned data(see [WGCNA](https://github.com/chestnzu1/BMC/blob/main/WGCNA_FPKM)) and genes are grouped  into different clusters. detailed information about WGCNA can be found at([WCGNA] https://horvath.genetics.ucla.edu/html/CoexpressionNetwork/Rpackages/WGCNA/Tutorials/index.html) 
+
+## hub genes identification and functional similarities between modules 
+Clusters were identified and export to cytoscape to find hub genes for each cluster. 5 genes with the highest intra-modular connectivity in each module were designated as hub genes. The closeness of the proteins encoded by hub genes of clusters which have a high overlap on hub genes are revealed by using String Database(https://string-db.org/cgi/input?sessionId=bKwPqj7oGzsF&input_page_show_search=on). 
+Next, clusters were paired and the functional similarity were calculated by using aforementioned R package GOSemSim using the same code. The visualization of the functional similarity results were accomplished by using python Package *seaborn*. functional similarity data can be found at https://fairdomhub.org/data_files/4015?graph_view=tree.
