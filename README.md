@@ -44,12 +44,18 @@ Clusters were identified and export to cytoscape to find hub genes for each clus
 Next, clusters were paired and the functional similarity were calculated by using aforementioned R package GOSemSim using the same code.  The visualization of the functional similarity results and the comparison of enriched GO terms of clusters with high functional similarity were accomplished by using python Package *seaborn*.  Functional similarity data can be found at https://fairdomhub.org/data_files/4015?graph_view=tree.
 
 ## Gene Ontology archive data
-Gene Ontology archive data was downloaded from http://archive.geneontology.org/full/. We downloaded go_xxxxxx_termdb-tables.tar.gz from subdirectory. Then we load the *term* and *term2term* file into sql and we constructed a edge file by using multi-queries in sql. 
+Gene Ontology archive data was downloaded from http://archive.geneontology.org/full/. We downloaded go_xxxxxx_termdb-tables.tar.gz from subdirectory. Then we load the *term* and *term2term* file into sql and we constructed a edge file by using multi-queries in sql. We only consider GO terms whose type are *biological_process*.
 ```
- #term2term201206 and term201206 can be found in the downloaded zip file, they are named as term2term and term respectively in the zipped file
+ #term2term201206 and term201206 can be found in the downloaded zip file, they are named as term2term and term respectively in the zipped file.
  with term2term201206 as(select term1,term2,relationship from term2term201206),
  term201206 as (select * from term201206 where term_type='biological_process' or is_relation=1),
  t as (select s1.acc as name1,s2.acc as name2,s1.relationship from (select term2term201206.term1,term201206.acc,term2term201206.term2,term2term201206.relationship from term2term201206 left join term201206 on term2term201206.term1=term201206.id where term201206.acc!='all' and term201206.is_relation=0 and term201206.is_obsolete=0) as s1 inner join 
 					  (select term2term201206.term1,term201206.acc,term2term201206.term2,term2term201206.relationship from term2term201206 left join term201206 on term2term201206.term2=term201206.id where term201206.acc!='all' and term201206.is_relation=0 and term201206.is_obsolete=0) as s2 on (s1.term1=s2.term1 and s2.term2=s1.term2))
-select t.name1,t.name2,term201206.acc as relation from t inner join term201206 on t.relationship=term201206.id into outfile 'xxxx'; # 
+select t.name1,t.name2,term201206.acc as relation from t inner join term201206 on t.relationship=term201206.id into outfile 'xxxx'; 
+```
+After getting the edge files, for each method ,we load edges files in cytoscape followed with selecting collected GO terms  and their first neighbors, edges between selected nodes are reserved. Then we use cytoscape app *DyNet analyzer* to compare constructed networks. 
+
+Similarly, the annotation count data can be downloaded from the aforementioned URL. We should download go_xxxxxx_assocdb-tables.tar.gz and load file *species* and *gene_product_count* into sql and run multiqueries to retrieve the annotation counts of selected GO terms at different timepoints. 
+```
+
 ```
