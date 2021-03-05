@@ -11,5 +11,8 @@ Code are for publication 'Establishing A Consensus Annotation for the Hallmarks 
 1 pathway mapping method is retrieved from paper:
 1)Uhlen, M., Zhang, C., Lee, S., Sjöstedt, E., Fagerberg, L., Bidkhori, G., Benfeitas, R., Arif, M., Liu, Z., Edfors, F., et al.: A pathology atlas of the human cancer transcriptome. Science 357(6352) (2017)
 ## Descendant/child GO terms
-Child terms of select GO terms from each method are retrieved by using QUICKGO API.(see [GO_descendant.py](https://github.com/chestnzu1/BMC/blob/main/GO_descendants.py)) Some selected terms are obsoleted.therefore, they are not included in this section. 
+Child terms of select GO terms from each method are retrieved by using QUICKGO API(see [GO_descendant.py](https://github.com/chestnzu1/BMC/blob/main/GO_descendants.py)). Some selected terms are obsoleted.therefore, they are not included in this section. We only consider relation type 'is_a' and 'part_of'. 
+## Gene annotated to selected pathways, GO terms and their descendants 
+Gene products annotated to selected pathways were directly provided by the author. For other methods, genes annotated to select GO terms and their descendant terms were retrieved by using QUICKGO API()
+
 
