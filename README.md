@@ -31,3 +31,6 @@ list_of_input<-list(GO1=GO1,GO2=GO2,GO3=GO3,GO4=GO4,PW1=PW1)
 upset(fromList(list_of_input),order.by = 'freq',queries=list(list(query=intersects,params=list('GO1','GO2','GO3','GO4'),active=T),list(query=intersects,params=list('GO1','GO2','GO3','GO4','PW1'),active=T)))
 ```
 GO1,GO2,GO3,GO4,PW1 represent the gene sets we get from the last step.
+
+## prognostic-hallmark genes
+The full list of prognostic genes can be found at https://fairdomhub.org/data_files/4046?graph_view=tree. In our study, we use Breast Cancer as 
