@@ -2,13 +2,12 @@ library(WGCNA)
 library(cluster)
 library(flashClust)
 options(stringsAsFactors = FALSE)
-brac=read.csv("E:/PHD/Msc_Internship/BMC_modification/WGCNA_GO1_log.csv")#load log transformed patient data(FPKM)
+brac=read.csv(WGCNA_GO1_log.csv")#load log transformed patient data(log-transformed FPKM). you can find the links to data in the readme file. 
 datBRAC=as.data.frame(t(brac[,-c(1,2)]))
 names(datBRAC)=brac$Gene
 rownames(datBRAC)=names(brac[,-c(1,2)])
 #we only have binary score showing if it is hallmark gene or not 
 gsg=goodSamplesGenes(datBRAC,verbose=3)
-gsg$allOK
 #next step clustering samples
 sampleTree=hclust(dist(datBRAC),method='average')
 sizeGrWindow(12,9)
@@ -38,7 +37,7 @@ plot(sft$fitIndices[,1], sft$fitIndices[,5],
      xlab="Soft Threshold (power)",ylab="Mean Connectivity", type="n",
      main = paste("Mean connectivity"))
 text(sft$fitIndices[,1], sft$fitIndices[,5], labels=powers, cex=cex1,col="red")
-expectpower=sft$powerEstimate
+expectpower=sft$powerEstimate           #find the expected powerEstimate
 net = blockwiseModules(datExpr, power =expectpower,#GO1,power=10,#GO2,power=6,#GO3,power=7
                        TOMType = "unsigned", minModuleSize = 10,#here we choose 10, as we only have hundreds sample.
                        reassignThreshold = 0, mergeCutHeight = 0.25,
