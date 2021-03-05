@@ -1,4 +1,3 @@
-# BMC
 Code are for publication 'Establishing A Consensus Annotation for the Hallmarks of Cancer based on Gene Ontology and pathway annotations'.Data can be found at FairdomHub https://fairdomhub.org/programmes/137.
 
 # workflow
@@ -37,3 +36,5 @@ The full list of prognostic genes can be found at https://fairdomhub.org/data_fi
 ```
 score = len((set1 & set2)) / len((set1 | set2)) # set1,set2 represent two sets of genes shared by the same combination of cancers when applying two different mapping schemes.
 ```
+## Co-expression network construction 
+We used prognostic-hallmark genes of breast cancer to construct the network.The full breast cancer FPKM values data can be found at https://fairdomhub.org/data_files/4047. Prognostic-hallmark genes with log-transformed FPKM value belonging to GO1 to GO4 can be found at https://fairdomhub.org/assays/1392?graph_view=tree.
