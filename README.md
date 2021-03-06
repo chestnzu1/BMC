@@ -63,3 +63,7 @@ select termxxxxxx.acc,final.product_count,final.common_name as species from fina
 ```
 The table presents the annotation counts of all selected GO terms at different time-points can be found at https://fairdomhub.org/data_files/4010?graph_view=tree.
 the cytoscape file contains all networks can be found at https://fairdomhub.org/data_files/4007?graph_view=tree.
+
+## Consensus between methods
+Mapping from MSigDB pathways to GO terms can be seen at https://fairdomhub.org/data_files/4019?graph_view=tree. The consensus GO terms for each individual hallmark can be found at https://fairdomhub.org/data_files/4018?graph_view=tree.  
+The visualization of consensus of individual cancer hallmarks were accomplished by using goa-tools. For more information about goa-tools, pls see [goa-tools](https://github.com/tanghaibao/goatools).
