@@ -57,5 +57,9 @@ After getting the edge files, for each method ,we load edges files in cytoscape 
 
 Similarly, the annotation count data can be downloaded from the aforementioned URL. We should download go_xxxxxx_assocdb-tables.tar.gz and load file *species* and *gene_product_count* into sql and run multiqueries to retrieve the annotation counts of selected GO terms at different timepoints. 
 ```
-
+with goterms as (select GO_ID from xxxx limit 100),	#xxxx represent the table contains selected GO terms for each GO mapping schemes.
+final as (select gene_product_count.term_id,gene_product_count.product_count,species.common_name from species inner join gene_product_count on species.id=gene_product_count.species_id where species.ncbi_taxa_id=9606 and gene_product_count.term_id in (select id from termxxxxxx where acc in (select * from goterms)))
+select termxxxxxx.acc,final.product_count,final.common_name as species from final inner join termxxxxxx on final.term_id=termxxxxxx.id;
 ```
+The table presents the annotation counts of all selected GO terms at different time-points can be found at https://fairdomhub.org/data_files/4010?graph_view=tree.
+the cytoscape file contains all networks can be found at https://fairdomhub.org/data_files/4007?graph_view=tree.
