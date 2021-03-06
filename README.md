@@ -20,7 +20,8 @@ GO1, GO2 are two of four sets of selected GO terms.  semData is the GOSemSimDATA
 Child terms of select GO terms from each method are retrieved by using QUICKGO API(see [GO_descendant.py](https://github.com/chestnzu1/BMC/blob/main/GO_descendants.py)). Some selected terms are obsoleted.therefore, they are not included in this section. We only consider relation type 'is_a' and 'part_of'. 
 
 ## Gene annotated to selected pathways, GO terms and their descendants 
-Gene products annotated to selected pathways were directly provided by the author. For other methods, gene products annotated to select GO terms and their descendant terms were retrieved by using QUICKGO API(see [GO_annotation](https://github.com/chestnzu1/BMC/blob/main/GO_annotation.py)). As it can only retrieve GO terms with less than 10000 annotations, while for selected GO terms, two GO terms(*GO:0007155* and *GO:0006955*) have more than 10000 annotations. Therefore, we downloaded their annotations by using the QUICKGO webtool. Next, we converted retrieved gene products ID to Ensembl ID for each method by using Biomart-Ensembl webtool. The full list of hallmark genes can be found at https://fairdomhub.org/data_files/4013?graph_view=tree.
+Gene products annotated to selected pathways were directly provided by the author. For other methods, gene products annotated to select GO terms and their descendant terms were retrieved by using QUICKGO API(see [GO_annotation](https://github.com/chestnzu1/BMC/blob/main/GO_annotation.py)). As it can only retrieve GO terms with less than 10000 annotations, while for selected GO terms, two GO terms(*GO:0007155* and *GO:0006955*) have more than 10000 annotations. Therefore, we downloaded their annotations by using the QUICKGO webtool. Next, we converted retrieved gene products ID to Ensembl ID for each method by using Biomart-Ensembl webtool. The full list of hallmark genes can be found at https://fairdomhub.org/data_files/4013?graph_view=tree.  
+Mapping between GO terms and individual cancer hallmarks can be found at https://github.com/chestnzu1/BMC/blob/main/hallmarks_classification.
 
 ## Upset plot
 The upsetplot presents the intersections among 5 mapping methods. it was accomplished by using R package 'UpsetR'.
@@ -30,7 +31,7 @@ upset(fromList(list_of_input),order.by = 'freq',queries=list(list(query=intersec
 ```
 GO1,GO2,GO3,GO4,PW1 represent the gene sets we get from the last step.
 
-## prognostic-hallmark genes and 
+## prognostic-hallmark genes and Jaccard score
 The full list of prognostic genes can be found at https://fairdomhub.org/data_files/4046?graph_view=tree. The abbreviation of cancer names can be found at https://fairdomhub.org/data_files/4014?graph_view=tree. Prognostic-hallmark genes are the intersection of prognostic genes and hallmark genes. Prognostic-hallmarks genes shared by multiple cancers types are considered to be potential research targets. The overlap of prognostic-hallmark genes shared by the same combinations of cancers are calculated by using Jaccard index. Sets of genes with less than 5 members are removed.
 ```
 score = len((set1 & set2)) / len((set1 | set2)) # set1,set2 represent two sets of genes shared by the same combination of cancers when applying two different mapping schemes.
