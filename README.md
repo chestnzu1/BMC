@@ -34,6 +34,11 @@ GO1, GO2, GO3, GO4, PW1 represent the gene sets we get from the last step.
 ## prognostic-hallmark genes and Jaccard score
 The entire list of prognostic genes can be found at https://fairdomhub.org/data_files/4046?graph_view=tree. The abbreviation of cancer names can be found at https://fairdomhub.org/data_files/4014?graph_view=tree. Prognostic-hallmark genes are the intersection of prognostic genes and hallmark genes. Prognostic-hallmarks genes shared by multiple cancer types are considered to be potential research targets. The overlap of prognostic-hallmark genes shared by the same combinations of cancers are calculated by using the jaccard index. Sets of genes with less than five members are removed.
 ```
+##example:
+##In GO1 BRCA&CRC=['ENSG00000023445','ENSG00000029363','ENSG00000113013','ENSG00000117091', 'ENSG00000120217', 'ENSG00000138821','ENSG00000145819','ENSG00000162434',
+## 'ENSG00000162600', 'ENSG00000167553','ENSG00000173818', 'ENSG00000196411','ENSG00000197249','ENSG00000203879', 'ENSG00000213694'] set1
+##In GO2 BRCA&CRC=['ENSG00000023445', 'ENSG00000029363', 'ENSG00000100307', 'ENSG00000113013', 'ENSG00000117091', 'ENSG00000120217', 'ENSG00000127663', 'ENSG00000138821',   ##'ENSG00000145819', 'ENSG00000162434', 'ENSG00000173818', 'ENSG00000196411', 'ENSG00000197249', 'ENSG00000203879', 'ENSG00000213694'] set2
+## As len(set1&set2)=13 and len(set1|set2)=17, so the score is 0.764.
 score = len((set1 & set2)) / len((set1 | set2)) # set1,set2 represent two sets of genes shared by the same combination of cancers when applying two different mapping schemes.
 ```
 ## Co-expression network construction 
